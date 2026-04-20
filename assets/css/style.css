@@ -10220,6 +10220,9 @@ a.round-text img {
 
 .advisor-style-three .thumb img {
 	transition: all 0.35s ease-in-out;
+	aspect-ratio: 5 / 4;
+    object-fit: cover;
+    object-position: center;
 }
 
 .advisor-style-three:hover .thumb img {
