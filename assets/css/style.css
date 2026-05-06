@@ -7689,15 +7689,25 @@ ul.curriculum-list li .right-content i {
 	--bs-gutter-x: 10px;
 }
 
+.category-style-three-item.wow.fadeInUp {
+	height: 100%;
+}
+
+.category-style-three-item.wow.fadeInUp h4 {
+	text-transform: capitalize;
+}
+
 .category-style-three-item a {
 	display: block;
-	background: rgba(255, 255, 255, 0.7);
+	/* background: rgba(255, 255, 255, 0.7); */
 	padding: 50px;
+	border: 1px solid #ccc;
 	border-radius: 30px;
 	position: relative;
 	z-index: 1;
 	overflow: hidden;
 	backdrop-filter: blur(30px);
+	height: 100%;
 }
 
 .category-style-three-item a .icon img {
@@ -10192,6 +10202,10 @@ a.round-text img {
 
 .advisor-style-three .info h4 {
 	margin-bottom: 10px;
+}
+
+.advisor-style-three .info h4 a {
+	text-transform: capitalize;
 }
 
 .advisor-style-three .info span {
