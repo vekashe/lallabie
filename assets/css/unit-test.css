@@ -110,6 +110,9 @@ button.btn:hover::after {
 
 .blog-area .thumb img {
 	border-radius: 10px 10px 0 0;
+	aspect-ratio: 5 / 4;
+	object-fit: cover;
+	object-position: center;
 }
 
 .blog-area.blog-grid-colum .thumb img {

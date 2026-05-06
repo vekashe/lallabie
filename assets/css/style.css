@@ -7711,7 +7711,7 @@ ul.curriculum-list li .right-content i {
 }
 
 .category-style-three-item a .icon img {
-	height: 50px;
+	height: 35px;
 	position: absolute;
 	right: 50px;
 }
@@ -13197,6 +13197,10 @@ ul.faculty-list li {
 
 .activities-style-one.color-one {
 	background: #D94DA6;
+}
+
+.activities-style-one.color-one a {
+	text-transform: capitalize;
 }
 
 .activities-style-one.color-two {
