@@ -18639,6 +18639,11 @@ footer.dark-optional .footer-bottom p {
 	transition: 0.7s 0.3s allcubic-bezier(0.1, 0.1, 0.1, 1);
 }
 
+#admissionForm-set {
+	position: relative;
+	z-index: 3;
+}
+
 @-webkit-keyframes spinner {
 	to {
 		-webkit-transform: rotateZ(360deg);
