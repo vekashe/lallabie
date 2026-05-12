@@ -967,53 +967,55 @@
                             <h4 class="sub-title">Join with us</h4>
                             <h2 class="title split-text">Admission Form</h2>
                         </div>
-                        <form id="admissionForm" class="form-style-two" action="index-8.html#" method="POST">
+                        <form id="admissionForm" class="form-style-two" novalidate>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="f-name">Child Name</label>
-                                        <input class="form-control" id="f-name" name="f-name" type="text">
-                                        <span class="alert-error"></span>
+                                        <label for="f-name">Child Name <span style="color: red;">*</span></label>
+                                        <input class="form-control" id="f-name" name="f-name" type="text" required minlength="2" maxlength="50" pattern="[A-Za-z\s]+" placeholder="Enter child's name" title="Only letters and spaces allowed">
+                                        <span class="alert-error" style="color: #dc3545; font-size: 12px; display: none;"></span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="l-name">Parent Name</label>
-                                        <input class="form-control" id="l-name" name="l-name" type="text">
-                                        <span class="alert-error"></span>
+                                        <label for="l-name">Parent Name <span style="color: red;">*</span></label>
+                                        <input class="form-control" id="l-name" name="l-name" type="text" required minlength="2" maxlength="50" pattern="[A-Za-z\s]+" placeholder="Enter parent's name" title="Only letters and spaces allowed">
+                                        <span class="alert-error" style="color: #dc3545; font-size: 12px; display: none;"></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="email">Email Address</label>
-                                        <input class="form-control" id="email" name="email" type="email">
-                                        <span class="alert-error"></span>
+                                        <label for="email">Email Address <span style="color: red;">*</span></label>
+                                        <input class="form-control" id="email" name="email" type="email" required placeholder="example@email.com" title="Please enter a valid email address">
+                                        <span class="alert-error" style="color: #dc3545; font-size: 12px; display: none;"></span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="phone">Home Phone</label>
-                                        <input class="form-control" id="phone" name="phone" type="text">
-                                        <span class="alert-error"></span>
+                                        <label for="phone">Home Phone <span style="color: red;">*</span></label>
+                                        <input class="form-control" id="phone" name="phone" type="tel" required pattern="[0-9]{10}" maxlength="10" placeholder="10-digit phone number" title="Please enter a valid 10-digit phone number">
+                                        <span class="alert-error" style="color: #dc3545; font-size: 12px; display: none;"></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label for="subject">Select Class</label>
-                                        <select id="subject">
-                                            <option value="1">Pre-KG</option>
-                                            <option value="2">LKG</option>
-                                            <option value="3">UKG</option>
-                                            <option value="4">1st-Std</option>
-                                            <option value="5">2nd-Std</option>
-                                            <option value="6">3rd-Std</option>
-                                            <option value="7">4th-Std</option>
-                                            <option value="8">5th-Std</option>
+                                        <label for="subject">Select Class <span style="color: red;">*</span></label>
+                                        <select id="subject" name="subject" required class="form-control">
+                                            <option value="">-- Select a class --</option>
+                                            <option value="Pre-KG">Pre-KG</option>
+                                            <option value="LKG">LKG</option>
+                                            <option value="UKG">UKG</option>
+                                            <option value="1st-Std">1st-Std</option>
+                                            <option value="2nd-Std">2nd-Std</option>
+                                            <option value="3rd-Std">3rd-Std</option>
+                                            <option value="4th-Std">4th-Std</option>
+                                            <option value="5th-Std">5th-Std</option>
                                         </select>
+                                        <span class="alert-error" style="color: #dc3545; font-size: 12px; display: none;"></span>
                                     </div>
                                 </div>
                             </div>
@@ -1156,6 +1158,222 @@
     <script src="assets/js/ScrollTrigger.min.js"></script>
     <script src="assets/js/SplitText.min.js"></script>
     <script src="assets/js/main.js"></script>
+    
+    <!-- Google Sheets Form Submission with Validation Script -->
+    <script>
+        // Validation Rules
+        const validationRules = {
+            'f-name': {
+                required: true,
+                minLength: 2,
+                maxLength: 50,
+                pattern: /^[A-Za-z\s]+$/,
+                errorMessages: {
+                    required: 'Child name is required',
+                    minLength: 'Child name must be at least 2 characters',
+                    maxLength: 'Child name cannot exceed 50 characters',
+                    pattern: 'Child name can only contain letters and spaces'
+                }
+            },
+            'l-name': {
+                required: true,
+                minLength: 2,
+                maxLength: 50,
+                pattern: /^[A-Za-z\s]+$/,
+                errorMessages: {
+                    required: 'Parent name is required',
+                    minLength: 'Parent name must be at least 2 characters',
+                    maxLength: 'Parent name cannot exceed 50 characters',
+                    pattern: 'Parent name can only contain letters and spaces'
+                }
+            },
+            'email': {
+                required: true,
+                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                errorMessages: {
+                    required: 'Email address is required',
+                    pattern: 'Please enter a valid email address'
+                }
+            },
+            'phone': {
+                required: true,
+                pattern: /^[0-9]{10}$/,
+                errorMessages: {
+                    required: 'Phone number is required',
+                    pattern: 'Phone number must be exactly 10 digits'
+                }
+            },
+            'subject': {
+                required: true,
+                errorMessages: {
+                    required: 'Please select a class'
+                }
+            }
+        };
+
+        // Validate individual field
+        function validateField(fieldId) {
+            const field = document.getElementById(fieldId);
+            const errorSpan = field.parentElement.querySelector('.alert-error');
+            const rules = validationRules[fieldId];
+            let isValid = true;
+            let errorMessage = '';
+
+            if (!rules) return true;
+
+            const value = field.value.trim();
+
+            // Check required
+            if (rules.required && !value) {
+                isValid = false;
+                errorMessage = rules.errorMessages.required;
+            }
+
+            // Check minLength
+            if (isValid && rules.minLength && value.length < rules.minLength) {
+                isValid = false;
+                errorMessage = rules.errorMessages.minLength;
+            }
+
+            // Check maxLength
+            if (isValid && rules.maxLength && value.length > rules.maxLength) {
+                isValid = false;
+                errorMessage = rules.errorMessages.maxLength;
+            }
+
+            // Check pattern
+            if (isValid && rules.pattern && value && !rules.pattern.test(value)) {
+                isValid = false;
+                errorMessage = rules.errorMessages.pattern;
+            }
+
+            // Update UI
+            if (!isValid) {
+                field.classList.add('is-invalid');
+                field.style.borderColor = '#dc3545';
+                errorSpan.style.display = 'block';
+                errorSpan.textContent = errorMessage;
+            } else {
+                field.classList.remove('is-invalid');
+                field.style.borderColor = '';
+                errorSpan.style.display = 'none';
+                errorSpan.textContent = '';
+            }
+
+            return isValid;
+        }
+
+        // Validate entire form
+        function validateForm() {
+            const fieldIds = ['f-name', 'l-name', 'email', 'phone', 'subject'];
+            let isFormValid = true;
+
+            fieldIds.forEach(fieldId => {
+                if (!validateField(fieldId)) {
+                    isFormValid = false;
+                }
+            });
+
+            return isFormValid;
+        }
+
+        // Add real-time validation
+        document.getElementById('f-name').addEventListener('blur', () => validateField('f-name'));
+        document.getElementById('l-name').addEventListener('blur', () => validateField('l-name'));
+        document.getElementById('email').addEventListener('blur', () => validateField('email'));
+        document.getElementById('phone').addEventListener('blur', () => validateField('phone'));
+        document.getElementById('subject').addEventListener('change', () => validateField('subject'));
+
+        // Phone number - only allow digits
+        document.getElementById('phone').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        // Form submission
+        document.getElementById('admissionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Clear previous messages
+            const messageDiv = document.getElementById('message');
+            messageDiv.innerHTML = '';
+
+            // Validate form before submission
+            if (!validateForm()) {
+                messageDiv.classList.add('alert-error');
+                messageDiv.innerHTML = '✗ Please fix the errors above and try again.';
+                messageDiv.style.color = '#721c24';
+                messageDiv.style.padding = '10px';
+                messageDiv.style.borderRadius = '4px';
+                messageDiv.style.backgroundColor = '#f8d7da';
+                messageDiv.style.border = '1px solid #f5c6cb';
+                messageDiv.style.marginTop = '10px';
+                return;
+            }
+
+            // Replace with your Google Apps Script deployment URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyQ9WL07DgemGPUii0x-MQRU0VM0fA_OfVZXMvbffuibsq2WtxehDON4w0zsBbhwme3NQ/exec';
+            
+            const formData = new FormData(this);
+            const submitBtn = document.getElementById('submit');
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Submitting...';
+
+            fetch(scriptURL, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            })
+            .then(response => {
+                // Reset form
+                document.getElementById('admissionForm').reset();
+                
+                // Clear any error styles
+                document.querySelectorAll('.form-control').forEach(input => {
+                    input.classList.remove('is-invalid');
+                    input.style.borderColor = '';
+                    const errorSpan = input.parentElement.querySelector('.alert-error');
+                    if (errorSpan) {
+                        errorSpan.style.display = 'none';
+                    }
+                });
+
+                // Show success message
+                messageDiv.classList.remove('alert-error');
+                messageDiv.classList.add('alert-success');
+                messageDiv.innerHTML = '✓ Form submitted successfully! We will contact you soon.';
+                messageDiv.style.color = '#155724';
+                messageDiv.style.padding = '12px';
+                messageDiv.style.borderRadius = '4px';
+                messageDiv.style.backgroundColor = '#d4edda';
+                messageDiv.style.border = '1px solid #c3e6cb';
+                messageDiv.style.marginTop = '10px';
+
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Apply Now <i class="fa fa-paper-plane"></i>';
+                }, 3000);
+            })
+            .catch(error => {
+                // Show error message
+                messageDiv.classList.add('alert-error');
+                messageDiv.innerHTML = '✗ Error submitting form. Please try again.';
+                messageDiv.style.color = '#721c24';
+                messageDiv.style.padding = '12px';
+                messageDiv.style.borderRadius = '4px';
+                messageDiv.style.backgroundColor = '#f8d7da';
+                messageDiv.style.border = '1px solid #f5c6cb';
+                messageDiv.style.marginTop = '10px';
+                console.error('Error:', error);
+
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Apply Now <i class="fa fa-paper-plane"></i>';
+            });
+        });
+    </script>
 
 </body>
 </html>
